@@ -3,67 +3,38 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import CallApi from '../../API/CallApi';
-import styled from 'styled-components';
 import moment from 'moment';
 import '../../index.css';
 import bg_link from './avatar.png';
+import styled from 'styled-components';
 
-const Title = styled.h2`
-    text-align: center;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-    text-shadow: 2px 7px 5px rgba(0, 0, 0, 0.3);
-    font-size: 5rem;
-    font-weight: bolder;
-    margin-top: 5%;
-    color: #0b5592;
-`;
-const Infor_site = styled.div`
-    background-color: white;
-    padding: 2rem 3rem;
-    width: 60%;
-    box-shadow: 4px 4px 4px 4px rgba(0, 0, 0, 0.2),
-        8px 8px 8px 8px rgba(0, 0, 0, 0.19);
-    border-radius: 10px;
-    background-color: whitesmoke;
-`;
-const Infor = styled.div`
+const Body = styled.div`
+    position: relative;
+    overflow: hidden;
+    height: 100vh;
     display: flex;
-`;
-const Left_div = styled.div`
-    padding-right: 10px;
-    padding-left: 10px;
-    max-width: 35%;
-`;
-const Right_div = styled.div`
-    padding-right: 10px;
-    padding-left: 10px;
-    max-width: 35%;
-    margin-left: 2rem;
-`;
-const Image_div = styled.div`
-    padding-top: 30px;
-`;
-const Title_infor = styled.p`
-    font-size: 2.5rem;
-    width: 60%;
-    margin: auto;
-    padding-bottom: 20px;
-    text-align: center;
-    font-weight: bold;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-`;
-const Site = styled.div`
-    display: flex;
+    flex-direction: column;
+    align-items: center;
     justify-content: center;
-    margin-top: 10%;
+    background-image: url('https://i.pinimg.com/originals/d0/37/3c/d0373ccf3e773b74ed82648e765cca67.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.3); /* Lớp phủ mờ */
+        z-index: 1;
+    }
+    > * {
+        position: relative;
+        z-index: 2;
+    }
 `;
-const Btn_site = styled.div`
-    position: static;
-    margin-top: 5vh;
-    text-align: center;
-`;
-
-const Container = styled.div``;
 
 class InfoStudent extends Component {
     constructor(props) {
@@ -163,38 +134,61 @@ class InfoStudent extends Component {
         const classes = JSON.parse(localStorage.getItem('lop')) || [];
 
         return (
-            <Container className='container'>
-                <Title>Thông tin chi tiết</Title>
-                <Site>
-                    <Infor_site>
-                        <Title_infor>Thông tin cá nhân</Title_infor>
-                        <Infor>
-                            <Image_div>
-                                <img
-                                    className='avatar'
-                                    src={bg_link}
-                                    width='150px'
-                                    height='150px'
-                                />
-                            </Image_div>
-                            <Left_div>
-                                <p style={{ marginTop: '10px' }}>Họ : </p>
+            <Body>
+                {/* Tiêu đề chính */}
+                <h2 className='text-6xl font-bold text-white text-center mb-12 text-shadow-lg'>
+                    Thông tin chi tiết
+                </h2>
+
+                {/* Form thông tin */}
+                <div className='bg-white p-8 rounded-lg shadow-2xl w-full max-w-4xl'>
+                    <h3 className='text-4xl font-bold text-center text-gray-800 mb-8'>
+                        Thông tin cá nhân
+                    </h3>
+
+                    <div className='flex flex-col md:flex-row items-center md:items-start gap-8'>
+                        {/* Ảnh đại diện */}
+                        <div className='flex-shrink-0'>
+                            <img
+                                className='avatar'
+                                src={bg_link}
+                                width='180px'
+                                height='180px'
+                            />
+                        </div>
+
+                        {/* Thông tin bên trái */}
+                        <div className='flex-1'>
+                            <div className='mb-6'>
+                                <label className='block text-2xl font-medium text-gray-700 mb-2'>
+                                    Họ:
+                                </label>
                                 <input
                                     type='text'
                                     name='first_name'
                                     placeholder={student.first_name}
                                     onChange={this.onChange}
-                                    style={{ width: '150px' }}
+                                    className='w-full p-3 border rounded-md text-xl focus:outline-none focus:ring-2 focus:ring-blue-500'
                                 />
-                                <p style={{ marginTop: '10px' }}>Tên: </p>
+                            </div>
+
+                            <div className='mb-6'>
+                                <label className='block text-2xl font-medium text-gray-700 mb-2'>
+                                    Tên:
+                                </label>
                                 <input
                                     type='text'
                                     name='last_name'
                                     placeholder={student.last_name}
                                     onChange={this.onChange}
-                                    style={{ width: '150px' }}
+                                    className='w-full p-3 border rounded-md text-xl focus:outline-none focus:ring-2 focus:ring-blue-500'
                                 />
-                                <p style={{ marginTop: '10px' }}>Ngày sinh:</p>
+                            </div>
+
+                            <div className='mb-6'>
+                                <label className='block text-2xl font-medium text-gray-700 mb-2'>
+                                    Ngày sinh:
+                                </label>
                                 <input
                                     type='text'
                                     name='birthday'
@@ -202,25 +196,36 @@ class InfoStudent extends Component {
                                         student.birthday
                                     ).format('DD/MM/YYYY')}
                                     onChange={this.onChange}
-                                    style={{ width: '150px' }}
+                                    className='w-full p-3 border rounded-md text-xl focus:outline-none focus:ring-2 focus:ring-blue-500'
                                 />
-                                <p style={{ marginTop: '10px' }}>Giới tính:</p>
+                            </div>
+
+                            <div className='mb-6'>
+                                <label className='block text-2xl font-medium text-gray-700 mb-2'>
+                                    Giới tính:
+                                </label>
                                 <input
                                     type='text'
                                     name='gender'
                                     placeholder={student.gender}
                                     onChange={this.onChange}
-                                    style={{ width: '150px' }}
+                                    className='w-full p-3 border rounded-md text-xl focus:outline-none focus:ring-2 focus:ring-blue-500'
                                 />
-                            </Left_div>
-                            <Right_div>
-                                <p>Phụ huynh:</p>
+                            </div>
+                        </div>
+
+                        {/* Thông tin bên phải */}
+                        <div className='flex-1'>
+                            <div className='mb-6'>
+                                <label className='block text-2xl font-medium text-gray-700 mb-2'>
+                                    Phụ huynh:
+                                </label>
                                 <select
-                                    className='form-control'
                                     name='parent'
                                     required
-                                    value={this.state.parent_id} // Value là id
-                                    onChange={this.onChange}>
+                                    value={this.state.parent_id}
+                                    onChange={this.onChange}
+                                    className='w-full p-3 border rounded-md text-xl focus:outline-none focus:ring-2 focus:ring-blue-500'>
                                     <option value='' disabled hidden>
                                         {parent || 'Chọn phụ huynh'}
                                     </option>
@@ -230,13 +235,18 @@ class InfoStudent extends Component {
                                         </option>
                                     ))}
                                 </select>
-                                <p style={{ marginTop: '10px' }}>Lớp: </p>
+                            </div>
+
+                            <div className='mb-6'>
+                                <label className='block text-2xl font-medium text-gray-700 mb-2'>
+                                    Lớp:
+                                </label>
                                 <select
-                                    className='form-control'
                                     name='class'
                                     required
-                                    value={this.state.class_id} // Value là id
-                                    onChange={this.onChange}>
+                                    value={this.state.class_id}
+                                    onChange={this.onChange}
+                                    className='w-full p-3 border rounded-md text-xl focus:outline-none focus:ring-2 focus:ring-blue-500'>
                                     <option value='' disabled hidden>
                                         {className || 'Chọn lớp'}
                                     </option>
@@ -246,26 +256,26 @@ class InfoStudent extends Component {
                                         </option>
                                     ))}
                                 </select>
-                            </Right_div>
-                        </Infor>
-                    </Infor_site>
-                </Site>
-                <Btn_site>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                {/* Nút điều hướng */}
+                <div className='mt-10 flex gap-6'>
                     <Link
                         to='/home/list-students'
-                        className='goback btn btn-danger'
-                        style={{ marginRight: '20px' }}>
-                        <span className='fa fa-arrow-left'></span>   Quay lại
+                        className='flex items-center gap-2 bg-red-600 text-white px-6 py-3 rounded-md text-xl hover:bg-red-700 transition'>
+                        <span className='fa fa-arrow-left'></span> Quay lại
                     </Link>
                     <button
                         type='submit'
-                        className='btn btn-primary'
-                        style={{ marginRight: '20px' }}
-                        onClick={this.onSubmit}>
-                        <span className='fa fa-save'></span>   Ghi nhận
+                        onClick={this.onSubmit}
+                        className='flex items-center gap-2 bg-blue-600 text-white px-6 py-3 rounded-md text-xl hover:bg-blue-700 transition'>
+                        <span className='fa fa-save'></span> Ghi nhận
                     </button>
-                </Btn_site>
-            </Container>
+                </div>
+            </Body>
         );
     }
 }

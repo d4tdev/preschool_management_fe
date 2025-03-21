@@ -22,6 +22,8 @@ import ListFee from './Fee/ListFee';
 import ListMeal from './Meal/ListMeal';
 import InfoMeal from './Meal/Components/InfoMeal';
 import InfoSubject from './Subject/Components/InfoSubject';
+import Attendance from './Attendance/Attendance';
+import ListAttendance from './Attendance/ListAttendance';
 
 const routes = [
     {
@@ -31,9 +33,9 @@ const routes = [
     },
 
     {
-        path: '/home/chat',
+        path: '/home/attendance',
         exact: true,
-        main: () => <Chat />,
+        main: () => <Attendance />,
     },
     {
         path: '/home/list-fees',
@@ -44,6 +46,11 @@ const routes = [
         path: '/home/list-situations',
         exact: true,
         main: () => <ListSituation />,
+    },
+    {
+        path: '/home/list-attendances',
+        exact: true,
+        main: () => <ListAttendance />,
     },
     {
         path: '/home/list-students',

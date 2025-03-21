@@ -2,10 +2,10 @@
 import React, { Component } from 'react';
 import { BsClipboardData } from 'react-icons/bs';
 import { IoMdNotificationsOutline } from 'react-icons/io';
-import logo from './logo1.png';
-import home from './home.png';
-import '../NavBar.css';
 import CallApi from '../../API/CallApi';
+import home from './home.png';
+import logo from './logo1.png';
+
 export default class Home extends Component {
     componentDidMount() {
         CallApi(`subject`, 'GET', null).then((res) => {
@@ -25,42 +25,54 @@ export default class Home extends Component {
 
     render() {
         return (
-            <div id='main'>
-                <div className='homepage'>
-                    <p
-                        className='elements justify-center items-center flex gap-2'
-                        id='title'>
-                        <div className=''>
-                            <img className='w-[80px] h-[80px]' src={logo} />
+            <div className='min-h-screen bg-gray-100'>
+                {/* Nội dung chính */}
+                <div className='relative'>
+                    {/* Tiêu đề và logo */}
+                    <div className='max-w-full mx-auto p-8'>
+                        <div className='flex justify-center items-center gap-4 mb-8'>
+                            <img
+                                className='w-[60px] h-[60px] rounded-full shadow-lg'
+                                src={logo}
+                                alt='Logo TMNSC1'
+                            />
+                            <h1 className='text-6xl font-bold text-gray-800'>
+                                TMN<span className='text-blue-600'>SC1</span>
+                            </h1>
                         </div>
-                        TMN<span id='student'>SC1</span>
-                    </p>
-                    <hr className='elements' id='homehr' />
-                    <div className='introduction'>
-                        <img className='homewallpaper' src={home} />
-                        <h1 className='manage'>
-                            Mọi thứ
-                            <div id='_manage'>cần thiết cho việc</div> quản lý
-                            học sinh
-                        </h1>
+                        <hr className='border-t-2 border-gray-300 w-1/2 mx-auto mb-10' />
+                    </div>
 
-                        <p id='_intro1'>
-                            TMNSC1 là 1 website tiện ích giúp quản lý học sinh
+                    {/* Phần giới thiệu */}
+                    <div className='max-w-6xl mx-auto p-8 text-center'>
+                        <img
+                            className='w-max-w-6xl object-cover rounded-lg shadow-lg mb-8'
+                            src={home}
+                            alt='Home Wallpaper'
+                        />
+                        <h1 className='text-5xl font-bold text-gray-800 mb-4'>
+                            Mọi thứ{' '}
+                            <span className='block text-blue-600'>
+                                cần thiết cho việc
+                            </span>{' '}
+                            quản lý trẻ
+                        </h1>
+                        <p className='text-2xl text-gray-600 mb-6'>
+                            TMNSC1 là một website tiện ích giúp quản lý trẻ
                             Trường mầm non Sơn Cẩm 1 Thái Nguyên
                         </p>
-
-                        <div>
-                            Trang facebook chính thức của trường : &nbsp;
+                        <div className='text-xl text-gray-600 mb-6'>
+                            Trang Facebook chính thức của trường:
                             <a
-                                className='text-blue-300 underline'
+                                className='text-blue-600 underline hover:text-blue-700 transition'
                                 target='_blank'
+                                rel='noopener noreferrer'
                                 href='https://www.facebook.com/people/Tr%C6%B0%E1%BB%9Dng-M%E1%BA%A7m-non-x%C3%A3-S%C6%A1n-C%E1%BA%A9m-TPTN/100071679531592/'>
                                 https://www.facebook.com/people/Trường_mầm_non_xã_Sơn_Cẩm_TPTN
                             </a>
                         </div>
-                        <div className='footer1'>
-                            <br />
-                            <p className='mb-4'>
+                        <div className='text-xl text-gray-600 mb-10'>
+                            <p>
                                 Hàng ngàn tổ chức giáo dục ngày nay sử dụng hệ
                                 thống quản lý trường học phân mảnh và nền tảng
                                 phần mềm để quản lý các hoạt động hành chính và
@@ -69,45 +81,45 @@ export default class Home extends Component {
                                 đẹp mắt.
                             </p>
                         </div>
+                    </div>
 
-                        {/* FOOTER CHUC NANG */}
-
-                        <div className='footer2'>
-                            <hr className='elements' id='homehr' />
-                            <h1 id='_footer1'>Các tính năng của TMNSC1</h1>
-
-                            <div className='flex justify-center items-center gap-80'>
-                                <div className='flex flex-col justify-center items-center'>
-                                    <div className='footer_icons'>
-                                        <span className='fa fa-comment-dots'></span>
-                                    </div>
-                                    <div className='footer_fn' id=''>
-                                        Phụ huynh nhận thông báo
-                                    </div>
+                    {/* Phần tính năng */}
+                    <div className='max-w-7xl mx-auto p-8'>
+                        <hr className='border-t-2 border-gray-300 w-1/2 mx-auto mb-10' />
+                        <h1 className='text-5xl font-bold text-center text-gray-800 mb-12'>
+                            Các tính năng của TMNSC1
+                        </h1>
+                        <div className='grid grid-cols-1 md:grid-cols-4 gap-10'>
+                            <div className='flex flex-col justify-center items-center bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition'>
+                                <div className='text-6xl text-blue-600 mb-4'>
+                                    <span className='fa fa-comment-dots'></span>
                                 </div>
-                                <div className='flex flex-col justify-center items-center'>
-                                    <div className='footer_icons'>
-                                        <span className='fa fa-chart-bar'></span>
-                                    </div>
-                                    <div className='' id=''>
-                                        Theo dõi học phí
-                                    </div>
+                                <div className='text-2xl font-semibold text-gray-700'>
+                                    Phụ huynh nhận thông báo
                                 </div>
-                                <div className='flex flex-col justify-center items-center'>
-                                    <div className='footer_icons'>
-                                        <BsClipboardData />
-                                    </div>
-                                    <div className='' id=''>
-                                        Quản lý thông tin
-                                    </div>
+                            </div>
+                            <div className='flex flex-col justify-center items-center bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition'>
+                                <div className='text-6xl text-blue-600 mb-4'>
+                                    <span className='fa fa-chart-bar'></span>
                                 </div>
-                                <div className='flex flex-col justify-center items-center'>
-                                    <div className='footer_icons'>
-                                        <IoMdNotificationsOutline />
-                                    </div>
-                                    <div className='' id=''>
-                                        Thông báo tình trẻ
-                                    </div>
+                                <div className='text-2xl font-semibold text-gray-700'>
+                                    Theo dõi học phí
+                                </div>
+                            </div>
+                            <div className='flex flex-col justify-center items-center bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition'>
+                                <div className='text-6xl text-blue-600 mb-4'>
+                                    <BsClipboardData />
+                                </div>
+                                <div className='text-2xl font-semibold text-gray-700'>
+                                    Quản lý thông tin
+                                </div>
+                            </div>
+                            <div className='flex flex-col justify-center items-center bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition'>
+                                <div className='text-6xl text-blue-600 mb-4'>
+                                    <IoMdNotificationsOutline />
+                                </div>
+                                <div className='text-2xl font-semibold text-gray-700'>
+                                    Thông báo tình trẻ
                                 </div>
                             </div>
                         </div>

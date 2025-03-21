@@ -7,7 +7,7 @@ import './NavBar.css';
 import 'boxicons';
 import { AiOutlineHome } from 'react-icons/ai';
 import { BsClipboardData } from 'react-icons/bs';
-import { IoMdNotificationsOutline } from 'react-icons/io';
+import { IoMdCalendar, IoMdNotificationsOutline } from 'react-icons/io';
 import { BiLogOut } from 'react-icons/bi';
 import {
     BrowserRouter as Router,
@@ -34,6 +34,8 @@ class NavBar extends Component {
             chooseListClassroom: false,
             chooseListSubject: false,
             chooseListMeal: false,
+            chooseAttendance: false,
+            chooseListAttendance: false,
         };
     }
 
@@ -61,6 +63,8 @@ class NavBar extends Component {
             chooseListClassroom: false,
             chooseListSubject: false,
             chooseListMeal: false,
+            chooseAttendance: false,
+            chooseListAttendance: false,
         });
     };
 
@@ -76,6 +80,8 @@ class NavBar extends Component {
             chooseListClassroom: false,
             chooseListSubject: false,
             chooseListMeal: false,
+            chooseAttendance: false,
+            chooseListAttendance: false,
         });
     };
 
@@ -91,6 +97,8 @@ class NavBar extends Component {
             chooseListClassroom: false,
             chooseListSubject: false,
             chooseListMeal: false,
+            chooseAttendance: false,
+            chooseListAttendance: false,
         });
     };
 
@@ -106,6 +114,8 @@ class NavBar extends Component {
             chooseListClassroom: false,
             chooseListSubject: false,
             chooseListMeal: false,
+            chooseAttendance: false,
+            chooseListAttendance: false,
         });
     };
 
@@ -121,6 +131,8 @@ class NavBar extends Component {
             chooseListClassroom: true,
             chooseListSubject: false,
             chooseListMeal: false,
+            chooseAttendance: false,
+            chooseListAttendance: false,
         });
     };
 
@@ -136,6 +148,8 @@ class NavBar extends Component {
             chooseListClassroom: false,
             chooseListSubject: true,
             chooseListMeal: false,
+            chooseAttendance: false,
+            chooseListAttendance: false,
         });
     };
 
@@ -151,6 +165,8 @@ class NavBar extends Component {
             chooseListClassroom: false,
             chooseListSubject: false,
             chooseListMeal: false,
+            chooseAttendance: false,
+            chooseListAttendance: false,
         });
     };
 
@@ -181,6 +197,8 @@ class NavBar extends Component {
             chooseListClassroom: false,
             chooseListSubject: false,
             chooseListMeal: false,
+            chooseAttendance: false,
+            chooseListAttendance: false,
         });
     };
 
@@ -213,6 +231,42 @@ class NavBar extends Component {
             chooseListClassroom: false,
             chooseListSubject: false,
             chooseListMeal: false,
+            chooseAttendance: false,
+            chooseListAttendance: false,
+        });
+    };
+
+    chooseAttendance = () => {
+        this.setState({
+            chooseHome: false,
+            chooseNoti: false,
+            chooseChart: false,
+            chooseList: false,
+            chooseFees: false,
+            chooseInfoTeacher: false,
+            chooseProfile: false,
+            chooseListClassroom: false,
+            chooseListSubject: false,
+            chooseListMeal: false,
+            chooseAttendance: true,
+            chooseListAttendance: false,
+        });
+    };
+
+    chooseListAttendance = () => {
+        this.setState({
+            chooseHome: false,
+            chooseNoti: false,
+            chooseChart: false,
+            chooseList: false,
+            chooseFees: false,
+            chooseInfoTeacher: false,
+            chooseProfile: false,
+            chooseListClassroom: false,
+            chooseListSubject: false,
+            chooseListMeal: false,
+            chooseAttendance: false,
+            chooseListAttendance: true,
         });
     };
 
@@ -233,6 +287,8 @@ class NavBar extends Component {
             chooseListClassroom,
             chooseListSubject,
             chooseListMeal,
+            chooseAttendance,
+            chooseListAttendance,
         } = this.state;
         return (
             <Router>
@@ -262,44 +318,92 @@ class NavBar extends Component {
                                 <span className='tooltip'>Trang chủ</span>
                             </li>
                             {localStorage.getItem('role') === 'teacher' ? (
-                                <li
-                                    className={chooseNoti ? 'home' : ''}
-                                    onClick={this.chooseNoti}>
-                                    <Link to='/home/notification'>
-                                        {/* thong bao */}
-                                        <div className='icon'>
-                                            <IoMdNotificationsOutline />
-                                        </div>
-                                        <span className='links_name'>
+                                <div>
+                                    <li
+                                        className={chooseNoti ? 'home' : ''}
+                                        onClick={this.chooseNoti}>
+                                        <Link to='/home/notification'>
+                                            {/* thong bao */}
+                                            <div className='icon'>
+                                                <IoMdNotificationsOutline />
+                                            </div>
+                                            <span className='links_name'>
+                                                Thông báo về trẻ
+                                            </span>
+                                        </Link>
+                                        <span className='tooltip'>
                                             Thông báo về trẻ
                                         </span>
-                                    </Link>
-                                    <span className='tooltip'>
-                                        Thông báo về trẻ
-                                    </span>
-                                </li>
+                                    </li>
+                                    <li
+                                        className={
+                                            chooseAttendance ? 'home' : ''
+                                        }
+                                        onClick={this.chooseAttendance}>
+                                        <Link to='/home/attendance'>
+                                            {/* thong bao */}
+                                            <div className='icon'>
+                                                <IoMdCalendar />
+                                            </div>
+                                            <span className='links_name'>
+                                                Điểm danh trẻ
+                                            </span>
+                                        </Link>
+                                        <span className='tooltip'>
+                                            Điểm danh trẻ
+                                        </span>
+                                    </li>
+                                </div>
                             ) : null}
                             {localStorage.getItem('role') === 'parent' ? (
-                                <li
-                                    id='bangdiem'
-                                    className={
-                                        (chooseList ? 'home' : '') +
-                                        (role === 'student' ? 'student' : '')
-                                    }
-                                    onClick={this.chooseList}>
-                                    <Link to='/home/list-situations'>
-                                        {/* danh sach sinh vien */}
-                                        <div className='icon'>
-                                            <IoMdNotificationsOutline />
-                                        </div>
-                                        <span className='links_name'>
+                                <div>
+                                    <li
+                                        id='bangdiem'
+                                        className={
+                                            (chooseList ? 'home' : '') +
+                                            (role === 'student'
+                                                ? 'student'
+                                                : '')
+                                        }
+                                        onClick={this.chooseList}>
+                                        <Link to='/home/list-situations'>
+                                            {/* danh sach sinh vien */}
+                                            <div className='icon'>
+                                                <IoMdNotificationsOutline />
+                                            </div>
+                                            <span className='links_name'>
+                                                Thông báo về trẻ
+                                            </span>
+                                        </Link>
+                                        <span className='tooltip'>
                                             Thông báo về trẻ
                                         </span>
-                                    </Link>
-                                    <span className='tooltip'>
-                                        Thông báo về trẻ
-                                    </span>
-                                </li>
+                                    </li>
+                                    <li
+                                        id='bangdiem'
+                                        className={
+                                            (chooseListAttendance
+                                                ? 'home'
+                                                : '') +
+                                            (role === 'student'
+                                                ? 'student'
+                                                : '')
+                                        }
+                                        onClick={this.chooseListAttendance}>
+                                        <Link to='/home/list-attendances'>
+                                            {/* danh sach sinh vien */}
+                                            <div className='icon'>
+                                                <IoMdCalendar />
+                                            </div>
+                                            <span className='links_name'>
+                                                Điểm danh hàng ngay
+                                            </span>
+                                        </Link>
+                                        <span className='tooltip'>
+                                            Điểm danh hàng ngay
+                                        </span>
+                                    </li>
+                                </div>
                             ) : null}
                             {localStorage.getItem('role') === 'admin' ? (
                                 <div>
@@ -318,11 +422,11 @@ class NavBar extends Component {
                                                 <BsClipboardData />
                                             </div>
                                             <span className='links_name'>
-                                                Danh sách học sinh
+                                                Danh sách trẻ
                                             </span>
                                         </Link>
                                         <span className='tooltip'>
-                                            Danh sách học sinh
+                                            Danh sách trẻ
                                         </span>
                                     </li>
                                     <li

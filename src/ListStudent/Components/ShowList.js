@@ -57,7 +57,6 @@ class ListSV extends Component {
     render() {
         var { filter, sort } = this.state;
         var students = this.props.students;
-        console.log(students);
         if (filter) {
             if (filter.name) {
                 students = students.filter((student) => {
@@ -96,7 +95,6 @@ class ListSV extends Component {
                 });
             }
         }
-        console.log(students);
         var studentList = students.map((student, index) => {
             return (
                 <OneRowData

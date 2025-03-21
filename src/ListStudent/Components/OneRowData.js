@@ -14,7 +14,6 @@ class OneRowData extends Component {
 
     render() {
         var { student, index } = this.props;
-        console.log(student);
         return (
             <tr height='30px'>
                 <td className='text_center'>{index + 1}</td>

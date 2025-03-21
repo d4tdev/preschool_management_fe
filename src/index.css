@@ -1,6 +1,14 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@layer utilities {
+    @media (max-width: 768px) {
+        .bg-mobile {
+            background-image: url('path/to/mobile-background.jpg') !important;
+            background-size: contain !important;
+        }
+    }
+}
 
 body {
     margin: 0;

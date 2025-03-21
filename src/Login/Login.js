@@ -1,5 +1,6 @@
+/* eslint-disable react/style-prop-object */
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { Component } from 'react';
-import axios from 'axios';
 import { Redirect } from 'react-router-dom';
 import styled from 'styled-components';
 import { FaUser } from 'react-icons/fa';
@@ -9,99 +10,36 @@ import AppLogo from './home.jpg';
 import CallApi from '../API/CallApi';
 
 const Body = styled.div`
-    // background-color: rgb(186, 248, 255);
     position: relative;
     overflow: hidden;
     height: 100vh;
-`;
-const Container = styled.div`
-    width: 100%;
     display: flex;
+    flex-direction: row;
+    align-items: center;
     justify-content: center;
-`;
-const _Input = styled.input`
-    border: 0;
-    border-bottom: 2px solid #09599b;
-    outline: 0;
-    background: transparent;
-    width: 100%;
-`;
-const _Button = styled.button`
-    width: 260px;
-    margin-left: 70px;
-    height: 40px;
-    background-color: #2573b3;
-    color: white;
-    border: none;
-    border-radius: 10px;
-    font-size: 1.8rem;
-    transition: all 0.3s ease;
-    opacity: 0.9;
-    &:hover {
-        opacity: 1;
-        box-shadow: 0 4px 8px 4px rgba(0, 0, 0, 0.2),
-            0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    gap: 80px;
+    @media (max-width: 768px) {
+        flex-direction: column;
+        gap: 15px;
     }
-`;
-
-const Icon = styled.i`
-    padding: 0px 5px 2px 0px;
-    border-bottom: 2px solid #09599b;
-    margin-left: 18%;
-    // margin-right: 5px;
-    color: #2573b3;
-`;
-const Title = styled.p`
-    text-align: center;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-    font-weight: 600;
-    font-size: 3rem;
-    color: #2573b3;
-    padding: 20px 0px 20px 0px;
-`;
-const Title1 = styled.p`
-    width: 150px;
-    margin: auto;
-    text-align: center;
-    font-family: 'Poppins', sans-serif;
-    font-weight: bold;
-    font-size: 1.5rem;
-    padding-top: 15px;
-    padding-bottom: 15px;
-    opacity: 0.8;
-    transition: all 0.3s ease;
-    &:hover {
-        cursor: pointer;
-        opacity: 1;
-    }
-`;
-const Form = styled.form`
-    width: 400px;
-    height: 500px;
-    margin-top: 150px;
-    background-color: white;
-    margin-left: 30%;
-    border-radius: 60px;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-`;
-const Input_container = styled.div`
-    padding: 0 0 10px 0;
 `;
 const Uet_logo = styled.img`
-    width: 80px;
-    height: 80px;
-    margin-left: 160px;
-    margin-top: 30px;
-    padding-top: 10px;
+    width: 100px;
+    height: 100px;
 `;
 const App_logo = styled.img`
-    width: 500px;
-    height: 500px;
+    width: 400px;
+    height: 400px;
+    @media (max-width: 768px) {
+        width: 250px;
+        height: 250px;
+    }
 `;
 const App_logo_container = styled.div`
-    margin: 160px 0 0 150px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 `;
-const Form_container = styled.div``;
 const Line1 = styled.div`
     top: -11rem;
     left: -6rem;
@@ -124,14 +62,14 @@ const Line2 = styled.div`
 `;
 const Comment = styled.p`
     margin: auto;
-    max-width: 380px;
+    max-width: 300px;
     text-align: center;
     font-size: 1.4rem;
     color: rgb(9, 49, 95);
     transition: all 0.3s ease;
     font-weight: bold;
     opacity: 0.6;
-    line-height: 3rem;
+    line-height: 2.5rem;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     &:hover {
         opacity: 1;
@@ -139,14 +77,14 @@ const Comment = styled.p`
 `;
 const Comment1 = styled.p`
     margin: auto;
-    max-width: 380px;
+    max-width: 300px;
     text-align: center;
     font-size: 1.4rem;
     color: rgb(9, 49, 95);
     transition: all 0.3s ease;
     font-weight: bold;
     opacity: 0.6;
-    line-height: 3rem;
+    line-height: 2.5rem;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     &:hover {
         opacity: 1;
@@ -154,19 +92,20 @@ const Comment1 = styled.p`
 `;
 const Comment2 = styled.p`
     margin: auto;
-    max-width: 380px;
+    max-width: 300px;
     text-align: center;
     font-size: 1.4rem;
     color: rgb(9, 49, 95);
     transition: all 0.3s ease;
     font-weight: bold;
     opacity: 0.6;
-    line-height: 3rem;
+    line-height: 2.5rem;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     &:hover {
         opacity: 1;
     }
 `;
+
 class Login extends Component {
     constructor(props) {
         super(props);
@@ -191,51 +130,45 @@ class Login extends Component {
     submit = async (event) => {
         event.preventDefault();
 
-        await axios
-            .post('http://localhost:8000/api/auth/login', {
+        try {
+            const res = await CallApi('auth/login', 'POST', {
                 email: this.state.email,
                 password: this.state.password,
-            })
-            .then((res) => {
-                localStorage.setItem(
-                    'accessToken',
-                    res?.data?.data.access_token
-                );
-                localStorage.setItem('role', res?.data?.data.user.role);
-                localStorage.setItem('user', res?.data?.data.user.id);
-                localStorage.setItem('email', res?.data?.data.user.email);
-                localStorage.setItem('classId', res?.data?.data.user.class_id);
-                this.setState({
-                    isLogin: localStorage.getItem('accessToken') != null,
-                });
-
-                CallApi(`classroom`, 'GET', null).then((res) => {
-                    if (res?.data?.data != null) {
-                        localStorage.setItem(
-                            'lop',
-                            JSON.stringify(res?.data?.data)
-                        );
-                    }
-                });
-
-                if (res?.data?.data.user.role === 'parent') {
-                    CallApi(
-                        `fee?filters[parent_id]=${res?.data?.data.user.id}`,
-                        'GET',
-                        null
-                    ).then((res) => {
-                        if (res?.data?.data != null) {
-                            localStorage.setItem(
-                                'fee',
-                                JSON.stringify(res?.data?.data[0])
-                            );
-                        }
-                    });
-                }
-            })
-            .catch(function (error) {
-                alert('Sai tên đăng nhập hoặc mật khẩu');
             });
+
+            localStorage.setItem('accessToken', res?.data?.data.access_token);
+            localStorage.setItem('role', res?.data?.data.user.role);
+            localStorage.setItem('user', res?.data?.data.user.id);
+            localStorage.setItem('email', res?.data?.data.user.email);
+            localStorage.setItem('classId', res?.data?.data.user.class_id);
+            this.setState({
+                isLogin: localStorage.getItem('accessToken') != null,
+            });
+
+            const classroomRes = await CallApi('classroom', 'GET', null);
+            if (classroomRes?.data?.data != null) {
+                localStorage.setItem(
+                    'lop',
+                    JSON.stringify(classroomRes?.data?.data)
+                );
+            }
+
+            if (res?.data?.data.user.role === 'parent') {
+                const feeRes = await CallApi(
+                    `fee?filters[parent_id]=${res?.data?.data.user.id}`,
+                    'GET',
+                    null
+                );
+                if (feeRes?.data?.data != null) {
+                    localStorage.setItem(
+                        'fee',
+                        JSON.stringify(feeRes?.data?.data[0])
+                    );
+                }
+            }
+        } catch (error) {
+            alert('Sai tên đăng nhập hoặc mật khẩu');
+        }
     };
 
     render() {
@@ -246,65 +179,71 @@ class Login extends Component {
                 <Body>
                     <Line1></Line1>
                     <Line2></Line2>
-                    <Container>
-                        <App_logo_container>
-                            <App_logo src={AppLogo} />
-                            <Comment>
-                                Hệ thống quản lý và thông báo tình hình trẻ
-                            </Comment>
-                            <Comment1>
-                                cho phụ huynh trường mầm non Sơn Cẩm 1 Thái
-                                Nguyên
-                            </Comment1>
-                            <Comment2>
-                                Xây dựng và phát triển bởi Trần Tiến Đạt
-                            </Comment2>
-                        </App_logo_container>
-                        <Form_container>
-                            <Form
-                                action=''
-                                method='post'
-                                onSubmit={this.submit}>
-                                <Uet_logo src={Logo} />
-                                <Title>ĐĂNG NHẬP</Title>
-                                <div className='flex flex-col justify-center ml-2'>
-                                    <Input_container>
-                                        <Icon>
-                                            <FaUser />
-                                        </Icon>
-                                        <_Input
-                                            type='text'
-                                            required
-                                            name='email'
-                                            placeholder='Email đăng nhập'
-                                            value={this.state.email}
-                                            onChange={this.handle}
-                                            autoFocus
-                                        />
-                                    </Input_container>
-                                    <br />
-                                    <Input_container>
-                                        <Icon>
-                                            <RiLockPasswordFill />
-                                        </Icon>
-                                        <_Input
-                                            type='password'
-                                            name='password'
-                                            placeholder='Mật khẩu'
-                                            // value={this.state.password}
 
-                                            onChange={this.handle}></_Input>
-                                    </Input_container>
-                                </div>
-                                <br />
-                                {/* <Title1>Quên mật khẩu?</Title1> */}
-                                <_Button onClick={this.submit}>
-                                    Đăng nhập
-                                </_Button>
-                                <br />
-                            </Form>
-                        </Form_container>
-                    </Container>
+                    {/* Logo ứng dụng và comment */}
+                    <App_logo_container>
+                        <App_logo src={AppLogo} />
+                        <Comment>
+                            Hệ thống quản lý và thông báo tình hình trẻ
+                        </Comment>
+                        <Comment1>
+                            cho phụ huynh trường mầm non Sơn Cẩm 1 Thái Nguyên
+                        </Comment1>
+                        <Comment2>
+                            Xây dựng và phát triển bởi Trần Tiến Đạt
+                        </Comment2>
+                    </App_logo_container>
+
+                    {/* Form đăng nhập */}
+                    <form
+                        onSubmit={this.submit}
+                        className='flex flex-col items-center justify-center w-[450px] h-[500px] bg-white rounded-[60px] shadow-2xl'>
+                        <Uet_logo src={Logo} className='mb-6' />
+                        <h2 className='text-5xl font-semibold text-[#2573b3] mb-8'>
+                            ĐĂNG NHẬP
+                        </h2>
+
+                        <div className='w-[80%]'>
+                            <div className='mb-6'>
+                                <label className='flex items-center gap-2 text-xl font-medium text-[#2573b3] mb-2'>
+                                    <FaUser className='text-2xl' />
+                                    Email:
+                                </label>
+                                <input
+                                    type='text'
+                                    className='w-full p-2 border-b-2 border-[#09599b] focus:outline-none focus:border-[#2573b3] text-xl bg-transparent'
+                                    name='email'
+                                    placeholder='Email đăng nhập'
+                                    value={this.state.email}
+                                    onChange={this.handle}
+                                    autoFocus
+                                    required
+                                />
+                            </div>
+
+                            <div className='mb-8'>
+                                <label className='flex items-center gap-2 text-xl font-medium text-[#2573b3] mb-2'>
+                                    <RiLockPasswordFill className='text-2xl' />
+                                    Mật khẩu:
+                                </label>
+                                <input
+                                    type='password'
+                                    className='w-full p-2 border-b-2 border-[#09599b] focus:outline-none focus:border-[#2573b3] text-xl bg-transparent'
+                                    name='password'
+                                    placeholder='Mật khẩu'
+                                    value={this.state.password}
+                                    onChange={this.handle}
+                                    required
+                                />
+                            </div>
+                        </div>
+
+                        <button
+                            type='submit'
+                            className='bg-[#2573b3] text-white w-[260px] h-[45px] rounded-[10px] text-2xl hover:bg-[#1a5a8c] transition-all duration-300 hover:shadow-lg'>
+                            Đăng nhập
+                        </button>
+                    </form>
                 </Body>
             );
         }
