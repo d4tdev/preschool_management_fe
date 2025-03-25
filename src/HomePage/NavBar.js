@@ -35,6 +35,7 @@ class NavBar extends Component {
             chooseListSubject: false,
             chooseListMeal: false,
             chooseAttendance: false,
+            chooseListUser: false,
             chooseListAttendance: false,
         };
     }
@@ -64,6 +65,7 @@ class NavBar extends Component {
             chooseListSubject: false,
             chooseListMeal: false,
             chooseAttendance: false,
+            chooseListUser: false,
             chooseListAttendance: false,
         });
     };
@@ -81,6 +83,7 @@ class NavBar extends Component {
             chooseListSubject: false,
             chooseListMeal: false,
             chooseAttendance: false,
+            chooseListUser: false,
             chooseListAttendance: false,
         });
     };
@@ -98,6 +101,7 @@ class NavBar extends Component {
             chooseListSubject: false,
             chooseListMeal: false,
             chooseAttendance: false,
+            chooseListUser: false,
             chooseListAttendance: false,
         });
     };
@@ -115,6 +119,7 @@ class NavBar extends Component {
             chooseListSubject: false,
             chooseListMeal: false,
             chooseAttendance: false,
+            chooseListUser: false,
             chooseListAttendance: false,
         });
     };
@@ -132,6 +137,7 @@ class NavBar extends Component {
             chooseListSubject: false,
             chooseListMeal: false,
             chooseAttendance: false,
+            chooseListUser: false,
             chooseListAttendance: false,
         });
     };
@@ -149,6 +155,7 @@ class NavBar extends Component {
             chooseListSubject: true,
             chooseListMeal: false,
             chooseAttendance: false,
+            chooseListUser: false,
             chooseListAttendance: false,
         });
     };
@@ -166,6 +173,7 @@ class NavBar extends Component {
             chooseListSubject: false,
             chooseListMeal: false,
             chooseAttendance: false,
+            chooseListUser: false,
             chooseListAttendance: false,
         });
     };
@@ -198,6 +206,7 @@ class NavBar extends Component {
             chooseListSubject: false,
             chooseListMeal: false,
             chooseAttendance: false,
+            chooseListUser: false,
             chooseListAttendance: false,
         });
     };
@@ -232,6 +241,7 @@ class NavBar extends Component {
             chooseListSubject: false,
             chooseListMeal: false,
             chooseAttendance: false,
+            chooseListUser: false,
             chooseListAttendance: false,
         });
     };
@@ -266,7 +276,25 @@ class NavBar extends Component {
             chooseListSubject: false,
             chooseListMeal: false,
             chooseAttendance: false,
+            chooseListUser: false,
             chooseListAttendance: true,
+        });
+    };
+    chooseListUser = () => {
+        this.setState({
+            chooseHome: false,
+            chooseNoti: false,
+            chooseChart: false,
+            chooseList: false,
+            chooseFees: false,
+            chooseInfoTeacher: false,
+            chooseProfile: false,
+            chooseListClassroom: false,
+            chooseListSubject: false,
+            chooseListMeal: false,
+            chooseAttendance: false,
+            chooseListUser: true,
+            chooseListAttendance: false,
         });
     };
 
@@ -289,6 +317,7 @@ class NavBar extends Component {
             chooseListMeal,
             chooseAttendance,
             chooseListAttendance,
+            chooseListUser,
         } = this.state;
         return (
             <Router>
@@ -407,6 +436,28 @@ class NavBar extends Component {
                             ) : null}
                             {localStorage.getItem('role') === 'admin' ? (
                                 <div>
+                                    <li
+                                        id='bangdiem'
+                                        className={
+                                            (chooseListUser ? 'home' : '') +
+                                            (role === 'student'
+                                                ? 'student'
+                                                : '')
+                                        }
+                                        onClick={this.chooseListUser}>
+                                        <Link to='/home/list-users'>
+                                            {/* danh sach nguoi dung */}
+                                            <div className='icon'>
+                                                <BsClipboardData />
+                                            </div>
+                                            <span className='links_name'>
+                                                Danh sách người dùng
+                                            </span>
+                                        </Link>
+                                        <span className='tooltip'>
+                                            Danh sách người dùng
+                                        </span>
+                                    </li>
                                     <li
                                         id='bangdiem'
                                         className={

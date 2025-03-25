@@ -136,35 +136,42 @@ class Login extends Component {
                 password: this.state.password,
             });
 
-            localStorage.setItem('accessToken', res?.data?.data.access_token);
-            localStorage.setItem('role', res?.data?.data.user.role);
-            localStorage.setItem('user', res?.data?.data.user.id);
-            localStorage.setItem('email', res?.data?.data.user.email);
-            localStorage.setItem('classId', res?.data?.data.user.class_id);
-            this.setState({
-                isLogin: localStorage.getItem('accessToken') != null,
-            });
-
-            const classroomRes = await CallApi('classroom', 'GET', null);
-            if (classroomRes?.data?.data != null) {
+            if (res?.status == 200) {
                 localStorage.setItem(
-                    'lop',
-                    JSON.stringify(classroomRes?.data?.data)
+                    'accessToken',
+                    res?.data?.data.access_token
                 );
-            }
+                localStorage.setItem('role', res?.data?.data.user.role);
+                localStorage.setItem('user', res?.data?.data.user.id);
+                localStorage.setItem('email', res?.data?.data.user.email);
+                localStorage.setItem('classId', res?.data?.data.user.class_id);
+                this.setState({
+                    isLogin: localStorage.getItem('accessToken') != null,
+                });
 
-            if (res?.data?.data.user.role === 'parent') {
-                const feeRes = await CallApi(
-                    `fee?filters[parent_id]=${res?.data?.data.user.id}`,
-                    'GET',
-                    null
-                );
-                if (feeRes?.data?.data != null) {
+                const classroomRes = await CallApi('classroom', 'GET', null);
+                if (classroomRes?.data?.data != null) {
                     localStorage.setItem(
-                        'fee',
-                        JSON.stringify(feeRes?.data?.data[0])
+                        'lop',
+                        JSON.stringify(classroomRes?.data?.data)
                     );
                 }
+
+                if (res?.data?.data.user.role === 'parent') {
+                    const feeRes = await CallApi(
+                        `fee?filters[parent_id]=${res?.data?.data.user.id}`,
+                        'GET',
+                        null
+                    );
+                    if (feeRes?.data?.data != null) {
+                        localStorage.setItem(
+                            'fee',
+                            JSON.stringify(feeRes?.data?.data[0])
+                        );
+                    }
+                }
+            } else {
+                alert('Sai tên đăng nhập hoặc mật khẩu');
             }
         } catch (error) {
             alert('Sai tên đăng nhập hoặc mật khẩu');

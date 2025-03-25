@@ -127,23 +127,13 @@ class ListSituation extends Component {
 
                         {/* Nút Export to Excel */}
                         <div className='flex gap-4 w-full sm:w-auto justify-center'>
-                            <button
-                                className='bg-green-600 text-white px-6 py-3 rounded-md hover:bg-green-700 transition flex items-center gap-2 w-full sm:w-auto justify-center'
-                                onClick={() =>
-                                    document
-                                        .getElementById('export-excel-button')
-                                        ?.click()
-                                }>
-                                <span className='fa fa-file-export'></span>{' '}
-                                Export to Excel
-                                <div className='hidden'>
-                                    <ExportToExcel
-                                        apiData={situations}
-                                        fileName={item}
-                                        id='export-excel-button'
-                                    />
-                                </div>
-                            </button>
+                            <div className=''>
+                                <ExportToExcel
+                                    apiData={situations}
+                                    fileName={'Situations'}
+                                    id='export-excel-button'
+                                />
+                            </div>
                         </div>
                     </div>
 

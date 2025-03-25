@@ -9,6 +9,7 @@ import AddFormClassroom from './Classroom/Components/AddForm';
 import AddFormFee from './Fee/Components/AddForm';
 import AddFormSubject from './Subject/Components/AddForm';
 import AddFormMeal from './Meal/Components/AddForm';
+import AddFormUser from './User/Components/AddForm';
 import InfoStudent from './ListStudent/Components/InfoStudent';
 import ImportData from './ListStudent/Components/ImportData';
 import Profile from './Profile/Profile';
@@ -24,6 +25,7 @@ import InfoMeal from './Meal/Components/InfoMeal';
 import InfoSubject from './Subject/Components/InfoSubject';
 import Attendance from './Attendance/Attendance';
 import ListAttendance from './Attendance/ListAttendance';
+import ListUser from './User/ListUser';
 
 const routes = [
     {
@@ -68,6 +70,11 @@ const routes = [
         main: () => <ListSubject />,
     },
     {
+        path: '/home/list-users',
+        exact: true,
+        main: () => <ListUser />,
+    },
+    {
         path: '/home/list-meals',
         exact: true,
         main: () => <ListMeal />,
@@ -81,6 +88,11 @@ const routes = [
         path: '/home/list-students/add',
         exact: true,
         main: () => <AddForm />,
+    },
+    {
+        path: '/home/list-users/add',
+        exact: true,
+        main: () => <AddFormUser />,
     },
     {
         path: '/home/list-classrooms/add',

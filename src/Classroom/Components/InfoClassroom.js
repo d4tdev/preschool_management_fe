@@ -77,7 +77,6 @@ class InfoClassroom extends Component {
             teacher_id: '', // Lưu id để gửi API
         };
     }
-
     componentDidMount() {
         const { match } = this.props;
         if (match) {

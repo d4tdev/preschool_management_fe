@@ -183,25 +183,13 @@ class ListClassroom extends Component {
                                     <span className='fa fa-plus'></span> Thêm
                                     lớp học
                                 </Link>
-                                <button
-                                    className='bg-green-600 text-white px-6 py-3 rounded-md hover:bg-green-700 transition flex items-center gap-2 w-full sm:w-auto justify-center'
-                                    onClick={() =>
-                                        document
-                                            .getElementById(
-                                                'export-excel-button'
-                                            )
-                                            ?.click()
-                                    }>
-                                    <span className='fa fa-file-export'></span>{' '}
-                                    Export to Excel
-                                    <div className='hidden'>
-                                        <ExportToExcel
-                                            apiData={classrooms}
-                                            fileName={item || 'Classrooms'}
-                                            id='export-excel-button'
-                                        />
-                                    </div>
-                                </button>
+                                <div className=''>
+                                    <ExportToExcel
+                                        apiData={classrooms}
+                                        fileName={item || 'Classrooms'}
+                                        id='export-excel-button'
+                                    />
+                                </div>
                                 <Link
                                     to='/home/list-classrooms/import-data'
                                     className='bg-purple-600 text-white px-6 py-3 rounded-md hover:bg-purple-700 transition flex items-center gap-2 w-full sm:w-auto justify-center'>
