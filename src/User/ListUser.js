@@ -141,9 +141,9 @@ class ListUser extends Component {
                             <div className='flex flex-col sm:flex-row gap-4 w-full sm:w-auto justify-center'>
                                 <Link
                                     to='/home/list-users/add'
-                                    className='bg-blue-600 text-white px-6 py-3 rounded-md hover:bg-blue-700 transition flex items-center gap-2 w-full sm:w-auto justify-center'>
+                                    className='bg-blue-600 text-white px-6 py-3 rounded-md hover:bg-blue-700 hover:text-white transition flex items-center gap-2 w-full sm:w-auto justify-center'>
                                     <span className='fa fa-plus'></span> Thêm
-                                    học sinh
+                                    người dùng
                                 </Link>
                                 <div className=''>
                                     <ExportToExcel
@@ -154,7 +154,7 @@ class ListUser extends Component {
                                 </div>
                                 <Link
                                     to='/home/list-users/import-data'
-                                    className='bg-purple-600 text-white px-6 py-3 rounded-md hover:bg-purple-700 transition flex items-center gap-2 w-full sm:w-auto justify-center'>
+                                    className='bg-purple-600 text-white px-6 py-3 rounded-md  hover:bg-purple-700 hover:text-white transition flex items-center gap-2 w-full sm:w-auto justify-center'>
                                     <span className='fa fa-file-import'></span>{' '}
                                     Nhập dữ liệu từ Excel
                                 </Link>

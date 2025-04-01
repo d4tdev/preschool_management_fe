@@ -271,7 +271,7 @@ class InfoStudent extends Component {
                     <button
                         type='submit'
                         onClick={this.onSubmit}
-                        className='flex items-center gap-2 bg-blue-600 text-white px-6 py-3 rounded-md text-xl hover:bg-blue-700 transition'>
+                        className='flex items-center gap-2 bg-blue-600 text-white px-6 py-3 rounded-md text-xl hover:bg-blue-700 hover:text-white transition'>
                         <span className='fa fa-save'></span> Ghi nhận
                     </button>
                 </div>

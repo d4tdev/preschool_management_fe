@@ -188,7 +188,7 @@ class ListFee extends Component {
                             <div className='flex flex-col sm:flex-row gap-4 w-full sm:w-auto justify-center'>
                                 <Link
                                     to='/home/list-fees/add'
-                                    className='bg-blue-600 text-white px-6 py-3 rounded-md hover:bg-blue-700 transition flex items-center gap-2 w-full sm:w-auto justify-center'>
+                                    className='bg-blue-600 text-white px-6 py-3 rounded-md hover:bg-blue-700 hover:text-white transition flex items-center gap-2 w-full sm:w-auto justify-center'>
                                     <span className='fa fa-plus'></span> Thêm
                                     học phí
                                 </Link>
@@ -201,7 +201,7 @@ class ListFee extends Component {
                                 </div>
                                 <Link
                                     to='/home/list-fees/import-data'
-                                    className='bg-purple-600 text-white px-6 py-3 rounded-md hover:bg-purple-700 transition flex items-center gap-2 w-full sm:w-auto justify-center'>
+                                    className='bg-purple-600 text-white px-6 py-3 rounded-md  hover:bg-purple-700 hover:text-white transition flex items-center gap-2 w-full sm:w-auto justify-center'>
                                     <span className='fa fa-file-import'></span>{' '}
                                     Nhập dữ liệu từ Excel
                                 </Link>

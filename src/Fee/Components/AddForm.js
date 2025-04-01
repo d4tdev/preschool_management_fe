@@ -316,7 +316,7 @@ class AddForm extends Component {
                             <div className='flex justify-center gap-6'>
                                 <button
                                     type='submit'
-                                    className='bg-blue-600 text-white px-8 py-3 rounded-md hover:bg-blue-700 transition text-xl'>
+                                    className='bg-blue-600 text-white px-8 py-3 rounded-md hover:bg-blue-700 hover:text-white transition text-xl'>
                                     <span className='fa fa-plus mr-2'></span>Gửi
                                 </button>
                                 <Link
